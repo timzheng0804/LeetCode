@@ -12,8 +12,8 @@ public:
         ListNode* mergedList = new ListNode(-1);
         ListNode* beforeHead = mergedList;
         while (l1 || l2) {
-            if (!l1) { mergedList->next = l2; l2 = l2->next; }
-            else if (!l2) { mergedList->next = l1; l1 = l1->next;}
+            if (!l1) { mergedList->next = l2; l2 = l2->next; break; }
+            else if (!l2) { mergedList->next = l1; l1 = l1->next; break; }
             else if (l1->val < l2->val) { mergedList->next = l1; l1 = l1->next; }
             else { mergedList->next = l2; l2 = l2->next; }
             mergedList = mergedList->next;
