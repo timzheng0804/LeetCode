@@ -23,4 +23,14 @@ public:
         }
         return dummy.next;
     }
+
+    ListNode* swapPairs(ListNode* head) {
+        if (!head || !(head->next)) return head;
+        ListNode* second = head->next;
+        ListNode* third = second->next;
+        
+        second->next = head;
+        head->next = swapPairs(third);
+        return second;
+    }
 };
