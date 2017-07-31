@@ -9,19 +9,17 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        if (k == 0 || head == NULL) return head;
-        vector<ListNode*> list;
-        ListNode* acc = head;
-        while (acc) {
-            list.push_back(acc);
-            acc = acc->next;
+        if (!head) return head;
+        ListNode* newHead = head;
+        ListNode* tail = head;
+        int len = 1;
+        while (tail->next) { tail = tail->next; ++len; }
+        tail->next = head;
+        if (k %= len) {
+            for (int i = 0; i < len - k; ++i) tail = tail->next;
         }
-        if (k > list.size()) k %= list.size();
-        if (k == list.size() || k == 0) return head;
-        else {
-            list[list.size() - 1]->next = list[0];
-            list[list.size() - k - 1]->next = NULL;
-        }
-        return list[list.size() - k];
+        newHead = tail->next;
+        tail->next = NULL;
+        return newHead;
     }
 };
